@@ -18,6 +18,5 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource{
     // TODO: implement fetchNewestBooks
     throw UnimplementedError();
   }
-
 }
 
