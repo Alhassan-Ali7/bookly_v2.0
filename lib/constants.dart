@@ -9,3 +9,5 @@ const kGtSectraFine = 'GT Sectra Fine';
 const kMontserrat = 'Montserrat';
 
 const kFeaturedBox = 'featured_box';
+
+const kNewestBox = 'newest_box';
