@@ -16,7 +16,7 @@ class HomeViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               CustomAppBar(),
-              FeaturedBooksListViewBlocBuilder(),
+              FeaturedBooksListViewConsumerBuilder(),
               Padding(
                 padding: EdgeInsets.only(left: 30.0, top: 40, bottom: 20),
                 child: Text(
