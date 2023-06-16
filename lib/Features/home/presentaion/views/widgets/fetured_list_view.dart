@@ -1,33 +1,63 @@
 import 'package:bookly_app/Features/home/domain/entities/book_entity.dart';
+import 'package:bookly_app/Features/home/presentaion/manager/featured_books_cuibt/featured_books_cubit.dart';
 import 'package:bookly_app/Features/home/presentaion/views/widgets/custom_book_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FeaturedBooksListView extends StatelessWidget {
-  const FeaturedBooksListView({super.key, required this.books});
+class FeaturedBooksListView extends StatefulWidget {
+  const FeaturedBooksListView({Key? key, required this.books})
+      : super(key: key);
 
   final List<BookEntity> books;
 
   @override
+  State<StatefulWidget> createState() => _FeaturedBooksListViewState();
+}
+
+class _FeaturedBooksListViewState extends State<FeaturedBooksListView> {
+  late final ScrollController _scrollController;
+
+  var nextPage = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    var currentPositions = _scrollController.position.pixels;
+    var maxScrollLength = _scrollController.position.maxScrollExtent;
+    if (currentPositions >= 0.7 * maxScrollLength) {
+      BlocProvider.of<FeaturedBooksCubit>(context)
+          .fetchFeaturedBooks(pageNumber: nextPage);
+      nextPage++;
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.2762,
-        child: ListView.builder(
-          itemCount: books.length,
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(
-                left: 15,
-              ),
-              child: CustomBookImage(
-                image: books[index].image!,
-              ),
-            );
-          },
-        ),
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * .3,
+      child: ListView.builder(
+        controller: _scrollController,
+        itemCount: widget.books.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: CustomBookImage(
+              image: widget.books[index].image ?? '',
+            ),
+          );
+        },
       ),
     );
   }
