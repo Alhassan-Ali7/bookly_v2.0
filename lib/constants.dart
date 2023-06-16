@@ -4,6 +4,8 @@ const kPrimaryColor = Color(0xff100B20);
 
 const kTransitionDuration = Duration(milliseconds: 250);
 
- const kGtSectraFine = 'GT Sectra Fine';
+const kGtSectraFine = 'GT Sectra Fine';
 
- const kMontserrat = 'Montserrat';
+const kMontserrat = 'Montserrat';
+
+const kFeaturedBox = 'featured_box';
