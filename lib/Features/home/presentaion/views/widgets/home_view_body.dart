@@ -1,6 +1,6 @@
-import 'package:bookly_app/Features/home/presentaion/views/widgets/best_seller_list_view.dart';
 import 'package:bookly_app/Features/home/presentaion/views/widgets/custom_app_bar.dart';
-import 'package:bookly_app/Features/home/presentaion/views/widgets/fetured_list_view.dart';
+import 'package:bookly_app/Features/home/presentaion/views/widgets/featured_books_list_view_bloc_builder.dart';
+import 'package:bookly_app/Features/home/presentaion/views/widgets/newest_books_list_view_bloc_builder.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class HomeViewBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               CustomAppBar(),
-              FeaturedBooksListView(),
+              FeaturedBooksListViewBlocBuilder(),
               Padding(
                 padding: EdgeInsets.only(left: 30.0, top: 40, bottom: 20),
                 child: Text(
@@ -28,10 +28,12 @@ class HomeViewBody extends StatelessWidget {
           ),
         ),
         const SliverFillRemaining(
-          child: BestSellerListView(),
+          child: NewestBooksListViewBlocBuilder(),
         ),
       ],
     );
   }
 }
+
+
 
